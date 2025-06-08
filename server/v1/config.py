@@ -8,6 +8,7 @@ from pydantic import BaseModel
 class LLMConfig(BaseModel):
     """Configuration for LLM models."""
 
+    ollama_url: str = "http://localhost:11434"
     retriever_model: str = "phi4-mini"
     generator_model: str = "gemma3:4b"
     retriever_temperature: float = 0.0
@@ -57,6 +58,7 @@ class AppConfig(BaseModel):
         """Create configuration from environment variables."""
         return cls(
             llm=LLMConfig(
+                ollama_url=os.getenv("OLLAMA_URL", "http://localhost:11434"),
                 retriever_model=os.getenv("RETRIEVER_MODEL", "phi4-mini"),
                 generator_model=os.getenv("GENERATOR_MODEL", "gemma3:4b"),
                 retriever_temperature=float(os.getenv("RETRIEVER_TEMPERATURE", "0.0")),

@@ -71,13 +71,14 @@ services:
     ports:
       - "7860:7860"
     environment:
+      - OLLAMA_URL=http://host.docker.internal:11434
       - CHROMA_HOST=chroma
       - CHROMA_PORT=8000
       - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=chat_history      
+      - POSTGRES_DB=chat_history  
     depends_on:
       - postgres
       - chroma

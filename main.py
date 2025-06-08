@@ -1,5 +1,5 @@
 from interface import ChatInterface
-
+import os
 from server.v1 import gen_ai_response, config
 
 
@@ -23,5 +23,4 @@ if __name__ == "__main__":
     demo.launch(
         auth=("rayat.ass", "ppooii12"),
         debug=config.debug,
-        share=not config.debug,  # Disable sharing in debug mode
     )

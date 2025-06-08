@@ -70,10 +70,12 @@ prompt_template = ChatPromptTemplate.from_messages(
 
 # LLMs with configuration
 retriever_llm = OllamaLLM(
+    base_url=config.llm.ollama_url,
     model=config.llm.retriever_model,
     temperature=config.llm.retriever_temperature,
 )
 gen_llm = ChatOllama(
+    base_url=config.llm.ollama_url,
     model=config.llm.generator_model,
     temperature=config.llm.generator_temperature,
 )
@@ -86,7 +88,10 @@ persistent_client = chromadb.HttpClient(
 vectorstore = Chroma(
     client=persistent_client,
     collection_name=config.retrieval.collection_name,
-    embedding_function=OllamaEmbeddings(model=config.retrieval.embedding_model),
+    embedding_function=OllamaEmbeddings(
+        base_url=config.llm.ollama_url,
+        model=config.retrieval.embedding_model,
+    ),
 )
 
 # Metadata for mechanical engineering content with smart filtering

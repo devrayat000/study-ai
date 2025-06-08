@@ -16,7 +16,10 @@ def get_db(index_name: str = None):
     pc = Chroma(
         client=persistent_client,
         collection_name=index_name,
-        embedding_function=OllamaEmbeddings(model=config.retrieval.embedding_model),
+        embedding_function=OllamaEmbeddings(
+            base_url=config.llm.ollama_url,
+            model=config.retrieval.embedding_model,
+        ),
     )
     yield pc
 

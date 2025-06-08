@@ -13,10 +13,11 @@ RUN apt-get update && apt-get install -y \
     libpq-dev gcc && \
     rm -rf /var/lib/apt/lists/*
 RUN uv lock
-RUN uv sync --frozen --no-cache --no-dev
+RUN uv sync --frozen --no-dev
 
 # Set the environment variable for the app.
 ENV DEBUG="false"
+ENV GRADIO_SERVER_NAME="0.0.0.0"
 EXPOSE 7860
 
 # Run the application.
